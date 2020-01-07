@@ -15,16 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/string', function () {
-    return 'Hello Word';
-});
-
-Route::get('/json', function () {
-    return ['name' => 'Ivan Iglesias'];
-});
-
 /*
- * Nuevo en PHP 7.4.
- * Los short closures solo pueden ser usados con una linea.
+ * http://localhost:8080/test?name=Ivan
+ * http://localhost:8080/test?name=<script>alert('Hello!')</script>
  */
-Route::get('/short-closure', fn() => view('welcome'));
+Route::get('/test', function () {
+    $name = request('name');
+
+    return view('test', [
+        'name' => $name
+    ]);
+});
