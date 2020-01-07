@@ -16,13 +16,20 @@ Route::get('/', function () {
 });
 
 /*
- * http://localhost:8080/test?name=Ivan
- * http://localhost:8080/test?name=<script>alert('Hello!')</script>
+ * http://localhost:8080/posts/my-first-post
+ * http://localhost:8080/posts/my-third-post
  */
-Route::get('/test', function () {
-    $name = request('name');
+Route::get('/posts/{post}', function ($post) {
+    $posts = [
+        'my-first-post' => 'Hello, this is my first post!',
+        'my-second-post' => 'This is my second post.'
+    ];
 
-    return view('test', [
-        'name' => $name
-    ]);
+    // return view('post', ['post' => $posts[$post] ?? 'Nothing here yet.']);
+
+    if (! array_key_exists($post, $posts)) {
+        abort(404, 'Sorry, that post was not found.');
+    }
+
+    return view('post', ['post' => $posts[$post]]);
 });
