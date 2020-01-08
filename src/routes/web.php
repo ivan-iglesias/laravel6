@@ -12,7 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/posts');
 });
 
+Route::get('/posts', 'PostsController@index');
+Route::post('/posts', 'PostsController@store');
+Route::get('/posts/create', 'PostsController@create');
 Route::get('/posts/{post}', 'PostsController@show');
