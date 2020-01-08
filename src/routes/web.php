@@ -15,6 +15,8 @@ Route::get('/', function () {
     return redirect('/posts');
 });
 
+Route::get('/about', fn() => view('about'));
+
 Route::get('/posts', 'PostsController@index');
 Route::post('/posts', 'PostsController@store');
 Route::get('/posts/create', 'PostsController@create');

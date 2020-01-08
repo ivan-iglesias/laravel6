@@ -14,12 +14,25 @@
 
         <style>
         body {
-            padding-top: 50px;
+            padding-top: 75px;
         }
         </style>
 
     </head>
     <body>
+
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <a class="navbar-brand" href="#">MyBlog</a>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item {{ Request::path() === 'posts' ? 'active': '' }}">
+                    <a class="nav-link" href="/posts">Home</a>
+                </li>
+                <li class="nav-item {{ Request::is('about*') ? 'active' : '' }}">
+                    <a class="nav-link" href="/about">About</a>
+                </li>
+            </ul>
+        </nav>
+
         <div class="container">
             @yield('content')
         </div>
