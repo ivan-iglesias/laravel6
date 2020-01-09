@@ -59,6 +59,6 @@ class PostsController extends Controller
         $post->body = request('body');
         $post->save();
 
-        return redirect('/posts/' . $post->id);
+        return redirect('/posts/' . $post->slug);
     }
 }

@@ -5,7 +5,7 @@
 <div id="wrapper">
     <h1>Update Post</h1>
 
-    <form method="POST" action="/posts/{{ $post->id }}">
+    <form method="POST" action="/posts/{{ $post->slug }}">
         @csrf
         @method('PUT')
 
