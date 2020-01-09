@@ -16,10 +16,8 @@ class PostsController extends Controller
         return view('posts.index', compact('posts'));
     }
 
-    public function show($slug)
+    public function show(Post $post)
     {
-        $post = Post::where('slug', $slug)->firstOrFail();
-
         return view('posts.show', compact('post'));
     }
 
@@ -37,5 +35,20 @@ class PostsController extends Controller
         $post->save();
 
         return redirect('/posts');
+    }
+
+    public function edit(Post $post)
+    {
+        return view('posts.edit', compact('post'));
+    }
+
+    public function update(Request $request, Post $post)
+    {
+        $post->slug = str::slug(request('title'));
+        $post->title = request('title');
+        $post->body = request('body');
+        $post->save();
+
+        return redirect('/posts/' . $post->id);
     }
 }
