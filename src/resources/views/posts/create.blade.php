@@ -10,19 +10,29 @@
 
         <div class="form-group">
             <label for="title">Title</label>
-            <input type="text"
-                   class="form-control"
-                   name="title"
-                   id="title"
-                   autocomplete="off">
+            <input
+                type="text"
+                name="title"
+                class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}"
+                autocomplete="off"
+                value="{{ old('title') }}">
+
+            @if ($errors->has('title'))
+                <p class="font-weight-light text-danger">{{ $errors->first('title') }}</p>
+            @endif
         </div>
 
         <div class="form-group">
             <label for="body">Body</label>
-            <textarea class="form-control"
-                      name="body"
-                      id="body"
-                      autocomplete="off"></textarea>
+            <textarea
+                name="body"
+                class="form-control @error('body') is-invalid @enderror"
+                autocomplete="off"
+            >{{ old('body') }}</textarea>
+
+            @error('body')
+                <p class="font-weight-light text-danger">{{ $errors->first('body') }}</p>
+            @enderror
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
