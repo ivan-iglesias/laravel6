@@ -34,7 +34,7 @@ class PostsController extends Controller
 
         Post::create($validatedAttributes);
 
-        return redirect('/posts');
+        return redirect(route('posts.index'));
     }
 
     public function edit(Post $post)
@@ -50,7 +50,7 @@ class PostsController extends Controller
 
         $post->update($validatedAttributes);
 
-        return redirect('/posts/' . $post->slug);
+        return redirect($post->path());
     }
 
     protected function validateArticle()

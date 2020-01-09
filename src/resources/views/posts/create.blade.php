@@ -5,7 +5,7 @@
 <div id="wrapper">
     <h1>New Post</h1>
 
-    <form method="POST" action="/posts">
+    <form method="POST" action="{{ route('posts.index') }}">
         @csrf
 
         <div class="form-group">

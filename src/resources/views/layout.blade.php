@@ -25,7 +25,7 @@
             <a class="navbar-brand" href="#">MyBlog</a>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item {{ Request::path() === 'posts' ? 'active': '' }}">
-                    <a class="nav-link" href="/posts">Home</a>
+                    <a class="nav-link" href="{{ route('posts.index') }}">Home</a>
                 </li>
                 <li class="nav-item {{ Request::is('about*') ? 'active' : '' }}">
                     <a class="nav-link" href="/about">About</a>

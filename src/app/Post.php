@@ -16,4 +16,12 @@ class Post extends Model
     {
         return 'slug';
     }
+
+    /**
+     * Ruta del post.
+     */
+    public function path()
+    {
+        return route('posts.show', $this);
+    }
 }

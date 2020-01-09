@@ -17,9 +17,9 @@ Route::get('/', function () {
 
 Route::get('/about', fn() => view('about'));
 
-Route::get('/posts', 'PostsController@index');
+Route::get('/posts', 'PostsController@index')->name('posts.index');
 Route::post('/posts', 'PostsController@store');
 Route::get('/posts/create', 'PostsController@create');
-Route::get('/posts/{post}', 'PostsController@show');
+Route::get('/posts/{post}', 'PostsController@show')->name('posts.show');
 Route::get('/posts/{post}/edit', 'PostsController@edit');
 Route::put('/posts/{post}', 'PostsController@update');
