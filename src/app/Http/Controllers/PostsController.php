@@ -28,16 +28,11 @@ class PostsController extends Controller
 
     public function store()
     {
-        request()->validate([
-            'title' => ['required', 'min:3', 'max:255'],
-            'body' => 'required'
-        ]);
+        $validatedAttributes = $this->validateArticle();
 
-        $post = new Post();
-        $post->slug = str::slug(request('title'));
-        $post->title = request('title');
-        $post->body = request('body');
-        $post->save();
+        $validatedAttributes['slug'] = str::slug(request('title'));
+
+        Post::create($validatedAttributes);
 
         return redirect('/posts');
     }
@@ -49,16 +44,20 @@ class PostsController extends Controller
 
     public function update(Request $request, Post $post)
     {
-        request()->validate([
+        $validatedAttributes = $this->validateArticle();
+
+        $validatedAttributes['slug'] = str::slug(request('title'));
+
+        $post->update($validatedAttributes);
+
+        return redirect('/posts/' . $post->slug);
+    }
+
+    protected function validateArticle()
+    {
+        return request()->validate([
             'title' => ['required', 'min:3', 'max:255'],
             'body' => 'required'
         ]);
-
-        $post->slug = str::slug(request('title'));
-        $post->title = request('title');
-        $post->body = request('body');
-        $post->save();
-
-        return redirect('/posts/' . $post->slug);
     }
 }
