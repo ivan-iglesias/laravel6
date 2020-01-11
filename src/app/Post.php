@@ -26,6 +26,14 @@ class Post extends Model
     }
 
     /**
+     * The tags that belong to the post.
+     */
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
+    /**
      * Ruta del post.
      */
     public function path()
