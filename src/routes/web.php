@@ -15,11 +15,15 @@ Route::get('/', function () {
     return redirect('/posts');
 });
 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('/about', fn() => view('about'));
 
 Route::get('/posts', 'PostsController@index')->name('posts.index');
-Route::post('/posts', 'PostsController@store');
+Route::post('/posts', 'PostsController@store')->middleware(['auth']);
 Route::get('/posts/create', 'PostsController@create');
 Route::get('/posts/{post}', 'PostsController@show')->name('posts.show');
 Route::get('/posts/{post}/edit', 'PostsController@edit');
-Route::put('/posts/{post}', 'PostsController@update');
+Route::put('/posts/{post}', 'PostsController@update')->middleware(['auth']);

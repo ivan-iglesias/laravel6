@@ -2,7 +2,11 @@
 
 @section ('content')
 
-<h1>My Posts</h1>
+@auth
+    <h1>My Posts ({{ auth()->user()->name }})</h1>
+@else
+    <h1>My Posts</h1>
+@endauth
 
 <hr>
 
