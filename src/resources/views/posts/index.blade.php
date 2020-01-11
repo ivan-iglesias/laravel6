@@ -6,7 +6,7 @@
 
 <hr>
 
-@foreach ($posts as $post)
+@forelse ($posts as $post)
     <div class="card mb-3">
         <div class="card-body">
             <a href="{{ $post->path() }}">
@@ -15,6 +15,8 @@
             <p class="card-text">{{ $post->body }}</p>
         </div>
     </div>
-@endforeach
+@empty
+    <p>No relevant posts yet.</p>
+@endforelse
 
 @endsection

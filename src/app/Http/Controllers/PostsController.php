@@ -2,16 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Tag;
 use App\Post;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class PostsController extends Controller
 {
     public function index()
     {
-        $posts = Post::latest()->get();
+        if (request('tag')) {
+            $posts = Tag::where('name', request('tag'))->firstOrFail()->posts;
+        }
+        else {
+            $posts = Post::latest()->get();
+        }
 
         return view('posts.index', compact('posts'));
     }
