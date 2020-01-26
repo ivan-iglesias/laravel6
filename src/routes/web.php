@@ -29,3 +29,16 @@ Route::get('/posts/{post}/edit', 'PostsController@edit');
 Route::put('/posts/{post}', 'PostsController@update')->middleware(['auth']);
 
 Route::get('/example/collection', 'ExampleController@collection');
+
+Route::get('/service-container', function() {
+
+    $container = new \App\Container();
+
+    $container->bind('example', function() {
+        return new \App\Example();
+    });
+
+    $example = $container->resolve('example');
+
+    $example->go();
+});
