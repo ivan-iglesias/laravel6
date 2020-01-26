@@ -30,15 +30,19 @@ Route::put('/posts/{post}', 'PostsController@update')->middleware(['auth']);
 
 Route::get('/example/collection', 'ExampleController@collection');
 
+/*
+app()->bind('example', function() {
+    return new \App\Example();
+});
+*/
+
 Route::get('/service-container', function() {
-
-    $container = new \App\Container();
-
-    $container->bind('example', function() {
-        return new \App\Example();
-    });
-
-    $example = $container->resolve('example');
+    /*
+     * resolve('example');
+     * resolve(App\Example::class);
+     * app()->make(App\Example::class);
+     */
+    $example = resolve(App\Example::class);
 
     $example->go();
 });
