@@ -44,7 +44,7 @@ Route::get('/service-container', function() {
      * resolve(App\Example::class);
      * app()->make(App\Example::class);
      */
-    $example = resolve(App\Example::class);
+    $example = resolve('example');
 
     $example->go();
 });

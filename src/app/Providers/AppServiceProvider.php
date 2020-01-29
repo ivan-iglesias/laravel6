@@ -14,7 +14,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('App\Example', function() {
+        // Podriamos crear un service provider exclusivo para nuestra funcionalidad.
+        $this->app->bind('example', function() {
             $name = 'John Doe';
 
             return new Example($name);
