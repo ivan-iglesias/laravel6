@@ -37,7 +37,7 @@ class ExampleController extends Controller
      */
     public function facade1()
     {
-        \Illuminate\Support\Facades\Cache::remember('foo', 60, fn() => 'foobar');
+        \Illuminate\Support\Facades\Cache::remember('foo', 60, fn() => 'foobar 1');
 
         return \Illuminate\Support\Facades\Cache::get('foo');
     }
@@ -56,8 +56,26 @@ class ExampleController extends Controller
      */
     public function facade2(\Illuminate\Contracts\Cache\Repository $cache)
     {
-        $cache->remember('foo', 60, fn() => 'foobar');
+        $cache->remember('foo', 60, fn() => 'foobar 2');
 
         return $cache->get('foo');
+    }
+
+    /**
+     * Ejemplo haciendo uso de la Facade creada. Como la he añadido en el config/app.php > aliases
+     * solo necesito añadir \ al inicio en vez de importar el namespace.
+     */
+    public function facade3()
+    {
+        \ExampleFacade::go();
+    }
+
+    /**
+     * Ejemplo haciendo uso del service container. La clase se ha enlazado en el AppServiceProvider.
+     */
+    public function serviceContainer()
+    {
+        $example = resolve('example');
+        $example->go();
     }
 }

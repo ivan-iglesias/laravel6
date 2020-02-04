@@ -31,20 +31,5 @@ Route::put('/posts/{post}', 'PostsController@update')->middleware(['auth']);
 Route::get('/example/collection', 'ExampleController@collection');
 Route::get('/example/facade1', 'ExampleController@facade1');
 Route::get('/example/facade2', 'ExampleController@facade2');
-
-/*
-app()->bind('example', function() {
-    return new \App\Example();
-});
-*/
-
-Route::get('/service-container', function() {
-    /*
-     * resolve('example');
-     * resolve(App\Example::class);
-     * app()->make(App\Example::class);
-     */
-    $example = resolve('example');
-
-    $example->go();
-});
+Route::get('/example/facade3', 'ExampleController@facade3');
+Route::get('/example/service-container', 'ExampleController@serviceContainer');
