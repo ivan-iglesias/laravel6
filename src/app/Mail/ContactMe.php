@@ -31,7 +31,18 @@ class ContactMe extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.contact-me')
+        /**
+         * - Crear email con format markdown:
+         * php artisan make:mail ContactMe --markdown=emails.contact-me-md
+         *
+         * - Para editar el estilo del email:
+         * php artisan vendor:publish --tag=laravel-mail
+         *
+         * Se creara la carpeta "views/vendor/email", donde podemos modificar los estilos,
+         * incluso crear un css para usar de plantilla, estableciendolo en el fichero de
+         * configuración "mail.php".
+         */
+        return $this->markdown('emails.contact-me-md')
             ->subject('More information about ' . $this->topic);
     }
 }
