@@ -28,6 +28,9 @@ Route::get('/posts/{post}', 'PostsController@show')->name('posts.show');
 Route::get('/posts/{post}/edit', 'PostsController@edit');
 Route::put('/posts/{post}', 'PostsController@update')->middleware(['auth']);
 
+Route::get('/contact', 'ContactController@show');
+Route::post('/contact', 'ContactController@store');
+
 Route::get('/example/collection', 'ExampleController@collection');
 Route::get('/example/facade1', 'ExampleController@facade1');
 Route::get('/example/facade2', 'ExampleController@facade2');
