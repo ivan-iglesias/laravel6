@@ -31,6 +31,9 @@ Route::put('/posts/{post}', 'PostsController@update')->middleware(['auth']);
 Route::get('/contact', 'ContactController@show');
 Route::post('/contact', 'ContactController@store');
 
+Route::get('payments/create', 'PaymentsController@create')->middleware('auth');
+Route::post('payments', 'PaymentsController@store')->middleware('auth');
+
 Route::get('/example/collection', 'ExampleController@collection');
 Route::get('/example/facade1', 'ExampleController@facade1');
 Route::get('/example/facade2', 'ExampleController@facade2');
