@@ -5,11 +5,15 @@ Explicación de las funcionalidades de Laravel 6 siguiendo los videos de [Laraca
 
 ## Despliegue
 
-1. Crear la carpeta mysql
-
-2. Creamos e inicializamos todos los contenedores
+1. Creamos e inicializamos todos los contenedores
 ```sh
 docker-compose up -d --build
+```
+
+2. Obtener la ip del contenedor con la base de datos
+```sh
+docker ps
+docker inspect <container ID> | grep "IPAddress"
 ```
 
 3. Entramos al contenedor con php
@@ -17,15 +21,32 @@ docker-compose up -d --build
 docker exec -it laravel6_php_1 bash
 ```
 
-4. Dentro del contenedor, instalar dependencias, crear el fichero .env y generar la key.
+4. Dentro del contenedor, instalar dependencias, crear el fichero .env y generar la key
 ```sh
 composer install
 cp .env.example .env
 php artisan key:generate
 ```
 
-## Comandos básicos docker
+5. Actualizar el parametro `DB_HOST` del fichero `.env`, con la ip con la devuelta en el paso 2.
+
+6. Ejecutar las migracione y datos de prueba
 ```sh
+php artisan migrate:install
+php artisan migrate:fresh --seed
+```
+
+7. Acceder a la web mediante `http://localhost:8080`.
+
+## Comandos Docker
+
+```sh
+# Visualiza los contenedores en ejecución
+docker-compose top
+
+# Acceder a un contenedor
+docker exec -it <nombre_contenedor> bash
+
 # Inicializar servicios
 docker-compose start
 
@@ -35,4 +56,3 @@ docker-compose stop
 # Paramos y borramos todos los contenedores
 docker-compose down
 ```
-
