@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\ProductPurchased;
+use App\Listeners\AwardAchivements;
+use App\Listeners\SendShareableCoupon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -18,6 +21,12 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        /*
+        ProductPurchased::class => [
+            AwardAchivements::class,
+            SendShareableCoupon::class
+        ]
+        */
     ];
 
     /**
@@ -30,5 +39,14 @@ class EventServiceProvider extends ServiceProvider
         parent::boot();
 
         //
+    }
+
+    /**
+     * Para no tener que añadirlos manualmente arriba. Leera el método "handle"
+     * de las clases de la carpeta "Listeners" para determinar el evento.
+     */
+    public function shouldDiscoverEvents()
+    {
+        return true;
     }
 }
