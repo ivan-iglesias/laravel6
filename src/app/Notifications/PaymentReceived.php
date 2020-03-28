@@ -11,14 +11,16 @@ class PaymentReceived extends Notification
 {
     use Queueable;
 
+    protected $amount;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($amount)
     {
-        //
+        $this->amount = $amount;
     }
 
     /**
@@ -29,7 +31,10 @@ class PaymentReceived extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        // Mas tipos de notificaciones:
+        // https://laravel.com/docs/7.x/notifications#database-notifications
+
+        return ['mail', 'database'];
     }
 
     /**
@@ -58,7 +63,7 @@ class PaymentReceived extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'amount' => $this->amount
         ];
     }
 }
