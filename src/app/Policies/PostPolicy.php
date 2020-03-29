@@ -36,4 +36,16 @@ class PostPolicy
     {
         return ! $post->author->is($user);
     }
+
+    /**
+     * Determine whether the user can view the post.
+     *
+     * @param  \App\User  $user
+     * @param  \App\Post  $post
+     * @return mixed
+     */
+    public function view(User $user, Post $post)
+    {
+        return $post->author->is($user);
+    }
 }

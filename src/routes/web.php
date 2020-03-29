@@ -26,7 +26,7 @@ Route::post('/vote/{post}', 'PostVoteController@store');
 Route::get('/posts', 'PostsController@index')->name('posts.index');
 Route::post('/posts', 'PostsController@store')->middleware(['auth']);
 Route::get('/posts/create', 'PostsController@create');
-Route::get('/posts/{post}', 'PostsController@show')->name('posts.show');
+Route::get('/posts/{post}', 'PostsController@show')->name('posts.show')->middleware('can:view,post');
 Route::get('/posts/{post}/edit', 'PostsController@edit');
 Route::put('/posts/{post}', 'PostsController@update')->middleware(['auth']);
 
