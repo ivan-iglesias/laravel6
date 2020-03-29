@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -34,5 +35,12 @@ class AuthServiceProvider extends ServiceProvider
             return ! $post->author->is($user);
          });
         */
+
+        // Para admin, no quiero tener que hacerlo en todos los "Policy", por lo que lo añado aqui
+        Gate::before(function(User $user){
+            if ($user->id === 2) { // admin
+                return true;
+            }
+        });
     }
 }
