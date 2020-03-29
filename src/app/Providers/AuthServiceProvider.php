@@ -25,6 +25,14 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        /*
+         No la necesitamos usando PostPolicy
+
+         Si queremos que que sea valido para invitados, podemos añadir ? delante de User
+
+         Gate::define('update-post', function(User $user, Post $post){
+            return ! $post->author->is($user);
+         });
+        */
     }
 }

@@ -17,6 +17,19 @@
                 <h5 class="card-title">{{ $post->title }}</h5>
             </a>
             <p class="card-text">{{ $post->body }}</p>
+            <p>Likes {{ $post->likes }}</p>
+
+            @can('update', $post)
+            <form method="POST" action="/vote/{{ $post->slug }}">
+                @csrf
+
+                <button
+                    type="submit"
+                    class="btn btn-outline-primary btn-sm"
+                >Like
+                </button>
+            </form>
+            @endcan
         </div>
     </div>
 @empty

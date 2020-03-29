@@ -40,4 +40,13 @@ class Post extends Model
     {
         return route('posts.show', $this);
     }
+
+    /**
+     * Incremento la variable de likes.
+     */
+    public function like()
+    {
+        $this->likes += 1;
+        $this->save();
+    }
 }
